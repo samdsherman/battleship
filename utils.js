@@ -18,3 +18,20 @@ module.exports.printShipsGrid = function(grid, rows, cols) {
     console.log(current);
   });
 };
+
+module.exports.verifyCoordinates = function(coords, rowMap, colMap, rows, cols) {
+  if (coords.length !== 2) {
+    console.log('Invalid coordinate format. Should look like "D7"');
+    return false;
+  }
+  if (colMap[coords.charAt(0).toUpperCase()] === undefined) {
+    console.log('Invalid column. Valid options are ' + cols[0] + ' through ' + cols[cols.length - 1] + '.');
+    return false;
+  }
+  if (rowMap[coords.charAt(1)] === undefined) {
+    console.log('Invalid row. Valid options are ' + rows[0] + ' through ' + rows[rows.length - 1] + '.');
+    return false;
+  }
+
+  return true;
+};

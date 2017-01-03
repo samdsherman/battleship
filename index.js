@@ -1,10 +1,10 @@
 const utils = require('./utils');
 
 const ships = {
-  Carrier: 5,
-  Battleship: 4,
-  Cruiser: 3,
-  Submarine: 3,
+  // Carrier: 5,
+  // Battleship: 4,
+  // Cruiser: 3,
+  // Submarine: 3,
   Destroyer: 2
 };
 const colMap = {
@@ -54,10 +54,11 @@ players.forEach((player, index) => {
     console.log('Enter start and end coordinates in the format "A5"');
     while (true) {
       let start = utils.ask('Start? ');
+      if (!utils.verifyCoordinates(start, rowMap, colMap, rows, cols)) {
+        continue;
+      }
       let end = utils.ask('End? ');
-
-      if (start.length !== 2 || end.length !== 2) { // problem with extensibility
-        console.log('Invalid coordinate format. Should look like "D7"');
+      if (!utils.verifyCoordinates(end, rowMap, colMap, rows, cols)) {
         continue;
       }
 
@@ -66,14 +67,6 @@ players.forEach((player, index) => {
       let startRow = rowMap[start.charAt(1)];
       let endRow = rowMap[end.charAt(1)];
 
-      if (startCol === undefined || endCol === undefined) {
-        console.log('Invalid column. Valid options are ' + cols[0] + ' through ' + cols[cols.length - 1] + '.');
-        continue;
-      }
-      if (startRow === undefined || endRow === undefined) {
-        console.log('Invalid row. Valid options are ' + rows[0] + ' through ' + rows[rows.length - 1] + '.');
-        continue;
-      }
       if (startCol !== endCol && startRow !== endRow) {
         console.log('Invalid placement. Ship must lie on a row or a column, no diagonals please.');
         continue;
@@ -114,5 +107,8 @@ players.forEach((player, index) => {
       break;
     }
   }
+  console.log('Player ' + index + ' ships:');
+  utils.printShipsGrid(player, rows, cols);
+  utils.ask('Press enter to continue.');
   utils.clearConsole();
 });
