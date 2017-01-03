@@ -11,3 +11,7 @@ module.exports.ask = function(...questions) {
     });
   });
 };
+
+module.exports.clearConsole = function() {
+  console.log('\x1Bc');
+};
