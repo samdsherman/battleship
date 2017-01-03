@@ -1,15 +1,7 @@
-const prompt = require('prompt');
+const readlineSync = require('readline-sync');
 
-module.exports.ask = function(...questions) {
-  return new Promise((resolve, reject) => {
-    prompt.get(questions, (err, res) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(res);
-      }
-    });
-  });
+module.exports.ask = function(question) {
+  return readlineSync.question(question);
 };
 
 module.exports.clearConsole = function() {
