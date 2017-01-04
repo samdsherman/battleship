@@ -34,16 +34,10 @@ const rowMap = {
 const cols = Object.keys(colMap);
 const rows = Object.keys(rowMap);
 
-let players = [[], []];
-
-for (let i = 0; i < rows.length; ++i) {
-  players[0].push([]);
-  players[1].push([]);
-  for (let j = 0; j < cols.length; ++j) {
-    players[0][i].push(null);
-    players[1][i].push(null);
-  }
-}
+let players = [
+  utils.nullMatrix(rows.length, cols.length),
+  utils.nullMatrix(rows.length, cols.length)
+];
 
 players.forEach((player, index) => {
   for (let ship in ships) {
@@ -112,3 +106,5 @@ players.forEach((player, index) => {
   utils.ask('Press enter to continue.');
   utils.clearConsole();
 });
+
+let currentTurn = 0;

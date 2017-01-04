@@ -35,3 +35,14 @@ module.exports.verifyCoordinates = function(coords, rowMap, colMap, rows, cols) 
 
   return true;
 };
+
+module.exports.nullMatrix = function(rows, cols) {
+  let result = [];
+  for (let i = 0; i < rows; ++i) {
+    result.push([]);
+    for (let j = 0; j < cols; ++j) {
+      result[i].push(null);
+    }
+  }
+  return result;
+};
